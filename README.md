@@ -16,7 +16,7 @@ _**FOR OFFICIAL SERVERS**_:
 * _[Retail](https://github.com/bkader/Skada-Damage-Meter)_
 * _[Classic](https://github.com/bkader/Skada-Damage-Meter/tree/classic)_
 
-<p align="center"><img src="https://user-images.githubusercontent.com/4732702/157116158-711528b9-0964-45bc-994e-46f3e870810e.png" alt="Skada Cata"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/4732702/202471994-cd30fab8-fe04-4e90-ad6b-c6964becd2be.png" alt="Skada Cata"></p>
 
 ## IMPORTANT: How to install
 
