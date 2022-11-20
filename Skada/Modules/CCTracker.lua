@@ -31,7 +31,7 @@ Skada:RegisterModule("CC Done", function(L, P, _, C)
 	local mode_cols = nil
 
 	local function log_ccdone(set)
-		local actor = Skada:GetActor(set, cc_table.actorid, cc_table.actorname, cc_table.actorflags)
+		local actor = Skada:GetActor(set, cc_table.actorname, cc_table.actorid, cc_table.actorflags)
 		if not actor then return end
 
 		-- increment the count.
@@ -80,7 +80,7 @@ Skada:RegisterModule("CC Done", function(L, P, _, C)
 	function mode_spell:Update(win, set)
 		win.title = uformat(L["%s's control spells"], win.actorname)
 
-		local actor = set and set:GetActor(win.actorid, win.actorname)
+		local actor = set and set:GetActor(win.actorname, win.actorid)
 		local total = actor and actor.ccdone
 		local spells = (total and total > 0) and actor.ccdonespells
 
@@ -108,7 +108,7 @@ Skada:RegisterModule("CC Done", function(L, P, _, C)
 	function mode_target:Update(win, set)
 		win.title = uformat(L["%s's control targets"], win.actorname)
 
-		local targets, total, actor = get_actor_cc_targets(set, win.actorid, win.actorname)
+		local targets, total, actor = get_actor_cc_targets(set, win.actorname, win.actorid)
 		if not targets or not actor or total == 0 then
 			return
 		elseif win.metadata then
@@ -242,8 +242,8 @@ Skada:RegisterModule("CC Done", function(L, P, _, C)
 		return total, tbl
 	end
 
-	get_actor_cc_targets = function(self, id, name, tbl)
-		local actor = self:GetActor(id, name)
+	get_actor_cc_targets = function(self, name, id, tbl)
+		local actor = self:GetActor(name, id)
 		local spells = actor and actor.ccdone and actor.ccdonespells
 		if not spells then return end
 
@@ -291,7 +291,7 @@ Skada:RegisterModule("CC Taken", function(L, P, _, C)
 	}, {__index = Skada.extra_cc_spells})
 
 	local function log_cctaken(set)
-		local actor = Skada:GetActor(set, cc_table.actorid, cc_table.actorname, cc_table.actorflags)
+		local actor = Skada:GetActor(set, cc_table.actorname, cc_table.actorid, cc_table.actorflags)
 		if not actor then return end
 
 		-- increment the count.
@@ -339,7 +339,7 @@ Skada:RegisterModule("CC Taken", function(L, P, _, C)
 	function mode_spell:Update(win, set)
 		win.title = uformat(L["%s's control spells"], win.actorname)
 
-		local actor = set and set:GetActor(win.actorid, win.actorname)
+		local actor = set and set:GetActor(win.actorname, win.actorid)
 		local total = actor and actor.cctaken
 		local spells = (total and total > 0) and actor.cctakenspells
 
@@ -367,7 +367,7 @@ Skada:RegisterModule("CC Taken", function(L, P, _, C)
 	function mode_source:Update(win, set)
 		win.title = uformat(L["%s's control sources"], win.actorname)
 
-		local sources, total, actor = get_actor_cc_sources(set, win.actorid, win.actorname)
+		local sources, total, actor = get_actor_cc_sources(set, win.actorname, win.actorid)
 		if not sources or not actor or total == 0 then
 			return
 		elseif win.metadata then
@@ -501,8 +501,8 @@ Skada:RegisterModule("CC Taken", function(L, P, _, C)
 		return total, tbl
 	end
 
-	get_actor_cc_sources = function(self, id, name, tbl)
-		local actor = self:GetActor(id, name)
+	get_actor_cc_sources = function(self, name, id, tbl)
+		local actor = self:GetActor(name, id)
 		local spells = actor and actor.cctaken and actor.cctakenspells
 		if not spells then return end
 
@@ -542,7 +542,7 @@ Skada:RegisterModule("CC Breaks", function(L, P, _, C, M)
 	local GetPartyAssignment, UnitIterator = GetPartyAssignment, Skada.UnitIterator
 
 	local function log_ccbreak(set)
-		local actor = Skada:GetActor(set, cc_table.actorid, cc_table.actorname, cc_table.actorflags)
+		local actor = Skada:GetActor(set, cc_table.actorname, cc_table.actorid, cc_table.actorflags)
 		if not actor then return end
 
 		-- increment the count.
@@ -620,7 +620,7 @@ Skada:RegisterModule("CC Breaks", function(L, P, _, C, M)
 	function mode_spell:Update(win, set)
 		win.title = uformat(L["%s's control spells"], win.actorname)
 
-		local actor = set and set:GetActor(win.actorid, win.actorname)
+		local actor = set and set:GetActor(win.actorname, win.actorid)
 		local total = actor and actor.ccbreak
 		local spells = (total and total > 0) and actor.ccbreakspells
 
@@ -648,7 +648,7 @@ Skada:RegisterModule("CC Breaks", function(L, P, _, C, M)
 	function mode_target:Update(win, set)
 		win.title = uformat(L["%s's control targets"], win.actorname)
 
-		local targets, total, actor = get_actor_cc_break_targets(set, win.actorid, win.actorname)
+		local targets, total, actor = get_actor_cc_break_targets(set, win.actorname, win.actorid)
 		if not targets or not actor or total == 0 then
 			return
 		elseif win.metadata then
@@ -769,8 +769,8 @@ Skada:RegisterModule("CC Breaks", function(L, P, _, C, M)
 		}
 	end
 
-	get_actor_cc_break_targets = function(self, id, name, tbl)
-		local actor = self:GetActor(id, name)
+	get_actor_cc_break_targets = function(self, name, id, tbl)
+		local actor = self:GetActor(name, id)
 		local spells = actor and actor.ccbreak and actor.ccbreakspells
 		if not spells then return end
 
