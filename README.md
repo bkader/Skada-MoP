@@ -4,19 +4,19 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/bkader/Skada-MoP)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/bkader/Skada-MoP?label=version)
 
-_This version is a total **Rewrite** of Skada `r301` for `3.3.5` and not a **Backport** like some believe._
-
 Skada is a modular damage meter with various viewing modes, segmented fights and customizable windows. It aims to be highly efficient with memory and CPU.
+
+<p align="center"><img src="https://user-images.githubusercontent.com/4732702/202471994-cd30fab8-fe04-4e90-ad6b-c6964becd2be.png" alt="Skada Damage Meter"></p>
 
 _**FOR PRIVATE SERVERS**_:
 * _[Wrath of the Lich King](https://github.com/bkader/Skada-WoTLK)_
 * _[Cataclysm](https://github.com/bkader/Skada-Cata)_
 
 _**FOR OFFICIAL SERVERS**_:
-* _[Retail](https://github.com/bkader/Skada-Damage-Meter)_
-* _[Classic](https://github.com/bkader/Skada-Damage-Meter/tree/classic)_
+* _[Retail/Classic Wrath](https://github.com/bkader/Skada-Damage-Meter)_
 
-<p align="center"><img src="https://user-images.githubusercontent.com/4732702/202471994-cd30fab8-fe04-4e90-ad6b-c6964becd2be.png" alt="Skada MoP"></p>
+> ***Is this a backported version?***
+> **No**! This is total **rewrite** of the original addon, it all started from version `r301` for `3.3.5`and built up to the current state.
 
 ## IMPORTANT: How to install
 
@@ -28,9 +28,16 @@ _**FOR OFFICIAL SERVERS**_:
 
 ## Show Love & Support
 
-Though it's not required, **PayPal** donations are most welcome at **bkader[at]mail.com**, or via Discord [Donate Bot](https://donatebot.io/checkout/795698054371868743).
+Though it's not required, **PayPal**/**Paysera** donations are most welcome at **bkader[at]mail.com**.
 
-##   OTHER ADDONS
+## Special Credits
+
+* Original author: **Zarnivoop**
+* Localization: **meatgaga** (CN), **Ícar** & **Septimun** (ES), **Kader** (FR), **NGL** (RU)
+* Direct and indirect contributors: **Abel**, **Iqui**, **Jeb**, **Shoggoth**, **Havi** & **Ganrod**, **WotLK Community**.
+* The man behind the wheel: **[Nomadra](https://github.com/ridepad)**
+
+## OTHER ADDONS (Private Servers)
 
 * **!ElvinCDs**: [https://github.com/bkader/ElvinCDs](https://github.com/bkader/ElvinCDs)
 * **!KTracker**: [https://github.com/bkader/KTracker](https://github.com/bkader/KTracker)
