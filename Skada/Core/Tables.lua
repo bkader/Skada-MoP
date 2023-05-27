@@ -350,14 +350,23 @@ do
 	-- Useful in case you want to collect stuff done to units
 	-- at certain encounter phases for example.
 	--
-	-- table structure
+	-- table structure (all fields are optional and will be generated and cached by the addon)
+	--	start: 		when to start collecting (0.01 = 1%, default: 100%)
+	--	stop:		when to stop collecting (0.01 = 1%, default: 0%)
+	--	power:		whether to track the speficied power or health
+	--		0 - Mana
+	--		1 - Rage
+	--		2 - Focus
+	--		3 - Energy
+	--		4 - Happiness
+	--		5 - Runes
+	--		6 - Runic Power
+	--
 	-- 	name: 		name of the fake unit (optional)
 	-- 	text: 		text to use *format()* with (optional)
-	-- 	start: 		when to start collecting (1 = 100%)
-	-- 	stop: 		when to stop collecting (0.5 = 50%)
-	-- 	diff: 		table of allowed difficulties (omit for all)
-	-- 	power: 		which type of power to trach (omit for health)
 	-- 	values: 	table of difficulties to max health (optional)
+	-- 	diff: 		table of whitelisted difficulties (optional, default: all)
+	--		{["10h"] = true, ["25h"] = true}
 	--
 	-- **optional** fields will be generated and cached by the addon.
 	--
