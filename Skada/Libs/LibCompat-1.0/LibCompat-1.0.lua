@@ -345,38 +345,46 @@ do
 	local UnitExists, UnitGUID = UnitExists, UnitGUID
 	local LGT = LibStub("LibGroupInSpecT-1.0")
 
-	local cachedSpecs = setmetatable({}, {__index = function(self, guid)
-		local info = LGT:GetCachedInfo(guid)
-		local spec = info and info.global_spec_id or nil
-		rawset(self, guid, spec)
-		return spec
-	end})
+	local GetUnitSpec = setmetatable({}, {
+		__index = function(self, guid)
+			local info = LGT:GetCachedInfo(guid)
+			local spec = info and info.global_spec_id or nil
+			rawset(self, guid, spec)
+			return spec
+		end,
+		__newindex = function(self, guid, spec)
+			rawset(self, guid, spec)
+		end,
+		__call = function(self, guid)
+			return self[guid]
+		end
+	})
 
-	local cachedRoles = setmetatable({}, {__index = function(self, guid)
-		local info = LGT:GetCachedInfo(guid)
-		local role = info and info.spec_role or nil
-		rawset(self, guid, role)
-		return role
-	end})
-
-	local function GetUnitSpec(guid)
-		return cachedSpecs[guid]
-	end
-
-	local function GetUnitRole(guid)
-		return cachedRoles[guid]
-	end
+	local GetUnitRole = setmetatable({}, {
+		__index = function(self, guid)
+			local info = LGT:GetCachedInfo(guid)
+			local role = info and info.spec_role or nil
+			rawset(self, guid, role)
+			return role
+		end,
+		__newindex = function(self, guid, role)
+			rawset(self, guid, role)
+		end,
+		__call = function(self, guid)
+			return self[guid]
+		end
+	})
 
 	LGT:RegisterCallback("GroupInSpecT_Update", function(_, guid, _, info)
 		if not guid or not info then return end
-		cachedSpecs[guid] = info.global_spec_id or cachedSpecs[guid]
-		cachedRoles[guid] = info.spec_role or cachedRoles[guid]
+		GetUnitSpec[guid] = info.global_spec_id or GetUnitSpec[guid]
+		GetUnitRole[guid] = info.spec_role or GetUnitRole[guid]
 	end)
 
 	LGT:RegisterCallback("GroupInSpecT_Remove", function(_, guid)
 		if not guid then return end
-		cachedSpecs[guid] = nil
-		cachedRoles[guid] = nil
+		GetUnitSpec[guid] = nil
+		GetUnitRole[guid] = nil
 	end)
 
 	lib.GetUnitSpec = GetUnitSpec
