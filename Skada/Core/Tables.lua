@@ -5,7 +5,7 @@ local L = ns.Locale
 local setmetatable = setmetatable
 
 -------------------------------------------------------------------------------
--- ingoredSpells
+-- ingored spells
 -- a table of spells that are ignored per module.
 -- entries should be like so: [spellid] = true
 
@@ -82,6 +82,12 @@ local ignored_spells = {
 		[35916] = true, -- Molten Armor
 	}
 }
+
+-------------------------------------------------------------------------------
+-- ignored creautre ids (use creature ID: [cretureID] = true)
+-- a list of creature IDs of which CLEU <<DAMAGE>> events are ignored.
+
+local ignored_creatures = {}
 
 -------------------------------------------------------------------------------
 -- misc tables
@@ -537,9 +543,13 @@ if LBI then setmetatable(ns.creature_to_boss, {__index = LBI.BossIDs}) end
 -------------------------------------------------------------------------------
 
 -- ignored spells table
+local dummyTable = ns.dummyTable
 ns.ignored_spells = setmetatable(ignored_spells, {__index = function(t, key)
-	return ns.dummyTable
+	return dummyTable
 end})
+
+-- ignored creatures table
+ns.ignored_creatures = ignored_creatures
 
 -- miss type to table key
 ns.missTypes = {
