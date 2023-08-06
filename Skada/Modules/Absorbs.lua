@@ -656,7 +656,7 @@ Skada:RegisterModule("Absorbs", function(L, P, G)
 			click1 = mode_spell,
 			click2 = mode_target,
 			columns = {Absorbs = true, APS = true, Percent = true, sAPS = false, sPercent = true},
-			icon = [[Interface\Icons\spell_holy_devineaegis]]
+			icon = [[Interface\ICONS\spell_holy_devineaegis]]
 		}
 
 		mode_cols = self.metadata.columns
@@ -1030,7 +1030,7 @@ Skada:RegisterModule("Absorbs and Healing", function(L, P)
 			click2 = mode_target,
 			post_tooltip = hps_tooltip,
 			columns = {Healing = true, HPS = true, Percent = true, sHPS = false, sPercent = true},
-			icon = [[Interface\Icons\spell_holy_healingfocus]]
+			icon = [[Interface\ICONS\spell_holy_healingfocus]]
 		}
 	end
 end, "Absorbs", "Healing")
@@ -1113,7 +1113,7 @@ Skada:RegisterModule("HPS", function(L, P)
 			filterclass = true,
 			tooltip = hps_tooltip,
 			columns = {HPS = true, Percent = true},
-			icon = [[Interface\Icons\spell_nature_rejuvenation]]
+			icon = [[Interface\ICONS\spell_nature_rejuvenation]]
 		}
 
 		mode_cols = self.metadata.columns
@@ -1267,7 +1267,7 @@ Skada:RegisterModule("Healing Done By Spell", function(L, _, _, C)
 		self.metadata = {
 			click1 = mode_source,
 			columns = {Healing = true, HPS = false, Percent = true, sHPS = false, sPercent = true},
-			icon = [[Interface\Icons\spell_nature_healingwavelesser]]
+			icon = [[Interface\ICONS\spell_nature_healingwavelesser]]
 		}
 		mode_cols = self.metadata.columns
 		Skada:AddMode(self, "Absorbs and Healing")

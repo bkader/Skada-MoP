@@ -194,7 +194,7 @@ Skada:RegisterModule("CC Done", function(L, P, _, C)
 			click1 = mode_spell,
 			click2 = mode_target,
 			columns = {Count = true, Percent = false, sPercent = false},
-			icon = [[Interface\Icons\spell_frost_chainsofice]]
+			icon = [[Interface\ICONS\spell_frost_chainsofice]]
 		}
 
 		mode_cols = self.metadata.columns
@@ -453,7 +453,7 @@ Skada:RegisterModule("CC Taken", function(L, P, _, C)
 			click1 = mode_spell,
 			click2 = mode_source,
 			columns = {Count = true, Percent = false, sPercent = false},
-			icon = [[Interface\Icons\spell_magic_polymorphrabbit]]
+			icon = [[Interface\ICONS\spell_magic_polymorphrabbit]]
 		}
 
 		mode_cols = self.metadata.columns
@@ -707,7 +707,7 @@ Skada:RegisterModule("CC Breaks", function(L, P, _, C, M)
 			click1 = mode_spell,
 			click2 = mode_target,
 			columns = {Count = true, Percent = false, sPercent = false},
-			icon = [[Interface\Icons\spell_holy_sealofvalor]]
+			icon = [[Interface\ICONS\spell_holy_sealofvalor]]
 		}
 
 		mode_cols = self.metadata.columns
@@ -740,7 +740,7 @@ Skada:RegisterModule("CC Breaks", function(L, P, _, C, M)
 					type = "description",
 					name = self.localeName,
 					fontSize = "large",
-					image = [[Interface\Icons\spell_holy_sealofvalor]],
+					image = [[Interface\ICONS\spell_holy_sealofvalor]],
 					imageWidth = 18,
 					imageHeight = 18,
 					imageCoords = {0.05, 0.95, 0.05, 0.95},
