@@ -1,4 +1,4 @@
-# Skada for Mists of Pandaria (_Revisited - v1.8.84_)
+# Skada for Mists of Pandaria (_Revisited - v1.8.85_)
 
 ![Discord](https://img.shields.io/discord/795698054371868743?label=discord)
 ![GitHub last commit](https://img.shields.io/github/last-commit/bkader/Skada-MoP)
