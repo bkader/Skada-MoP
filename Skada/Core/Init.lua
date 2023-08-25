@@ -1427,6 +1427,7 @@ do
 	-- spell icon and name to speed up things
 	local SpellInfo = Private.SpellInfo
 	ns.spellnames = setmetatable({}, {
+		__mode = "kv",
 		__index = function(t, spellid)
 			local name, _, icon = SpellInfo(spellid)
 			if name then
@@ -1440,6 +1441,7 @@ do
 		end
 	})
 	ns.spellicons = setmetatable({}, {
+		__mode = "kv",
 		__index = function(t, spellid)
 			local name, _, icon = SpellInfo(spellid)
 			if name then
