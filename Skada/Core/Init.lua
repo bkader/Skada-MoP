@@ -1394,9 +1394,20 @@ do
 		[61607] = [[Interface\ICONS\ability_hunter_rapidkilling]] --> Mark of Blood
 	}
 
+	local strfind = string.find
+	-- used to split spell: [id].[school].[petname]
+	local function SpellSplit(spellid)
+		if type(spellid) == "string" and strfind(spellid, ".") then
+			local id, school, petname = strsplit(".", spellid, 3)
+			return tonumber(id), tonumber(school), petname
+		end
+		return spellid
+	end
+	Private.SpellSplit = SpellSplit
+
 	function Private.SpellInfo(spellid)
 		if spellid then
-			spellid = math_abs(spellid)
+			spellid = math_abs(SpellSplit(spellid))
 			local res1, res2, res3, res4, res5, res6, res7, res8, res9
 			if customSpells[spellid] then
 				res1, res3 = customSpells[spellid][1], customSpells[spellid][2]
@@ -1415,16 +1426,6 @@ do
 		if not customSpells[spellid] then
 			return GetSpellLink(math_abs(spellid))
 		end
-	end
-
-	local strfind = string.find
-	-- used to split spell: [id].[school].[petname]
-	function Private.SpellSplit(spellid)
-		if type(spellid) == "string" and strfind(spellid, ".") then
-			local id, school, petname = strsplit(".", spellid, 3)
-			return tonumber(id), tonumber(school), petname
-		end
-		return spellid
 	end
 
 	-- spell icon and name to speed up things
