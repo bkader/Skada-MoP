@@ -9,9 +9,8 @@ local tooltip_school = Skada.tooltip_school
 local hits_perc = "%s (\124cffffffff%s\124r)"
 local slash_fmt = "%s/%s"
 
--- ============== --
--- Absorbs module --
--- ============== --
+---------------------------------------------------------------------------
+-- Absorbs Module
 
 Skada:RegisterModule("Absorbs", function(L, P, G)
 	local mode = Skada:NewModule("Absorbs")
@@ -24,6 +23,7 @@ Skada:RegisterModule("Absorbs", function(L, P, G)
 
 	local band, tsort, max = bit.band, table.sort, math.max
 	local wipe, clear = wipe, Private.clearTable
+	local classfmt = Skada.classcolors.format
 	local mode_cols = nil
 
 	local ABSORB_SPELLS = {
@@ -443,7 +443,7 @@ Skada:RegisterModule("Absorbs", function(L, P, G)
 		local aps, damage = actor:GetAPS(set)
 
 		local activepercent = activetime / totaltime * 100
-		tooltip:AddDoubleLine(format(L["%s's activity"], label), Skada:FormatPercent(activepercent), nil, nil, nil, PercentToRGB(activepercent))
+		tooltip:AddDoubleLine(format(L["%s's activity"], classfmt(actor.class, label)), Skada:FormatPercent(activepercent), nil, nil, nil, PercentToRGB(activepercent))
 		tooltip:AddDoubleLine(L["Segment Time"], Skada:FormatTime(totaltime), 1, 1, 1)
 		tooltip:AddDoubleLine(L["Active Time"], Skada:FormatTime(activetime), 1, 1, 1)
 		tooltip:AddDoubleLine(L["Absorbs"], Skada:FormatNumber(damage), 1, 1, 1)
@@ -460,7 +460,7 @@ Skada:RegisterModule("Absorbs", function(L, P, G)
 		local spell = actor and actor.absorbspells and actor.absorbspells[id]
 		if not spell then return end
 
-		tooltip:AddLine(uformat("%s - %s", win.actorname, label))
+		tooltip:AddLine(uformat("%s - %s", classfmt(win.actorclass, win.actorname), label))
 		tooltip_school(tooltip, id)
 
 		local cast = actor.GetSpellCast and actor:GetSpellCast(id)
@@ -488,13 +488,13 @@ Skada:RegisterModule("Absorbs", function(L, P, G)
 		end
 	end
 
-	function mode_target_spell:Enter(win, id, label)
-		win.targetid, win.targetname = id, label
-		win.title = uformat(L["%s's spells on %s"], win.actorname, label)
+	function mode_target_spell:Enter(win, id, label, class)
+		win.targetid, win.targetname, win.targetclass = id, label, class
+		win.title = uformat(L["%s's spells on %s"], classfmt(win.actorclass, win.actorname), classfmt(class, label))
 	end
 
 	function mode_target_spell:Update(win, set)
-		win.title = uformat(L["%s's spells on %s"], win.actorname, win.targetname)
+		win.title = uformat(L["%s's spells on %s"], classfmt(win.actorclass, win.actorname), classfmt(win.targetclass, win.targetname))
 		if not set or not win.targetname then return end
 
 		local actor = set:GetActor(win.actorname, win.actorid)
@@ -523,13 +523,13 @@ Skada:RegisterModule("Absorbs", function(L, P, G)
 		end
 	end
 
-	function mode_spell:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = format(L["%s's spells"], label)
+	function mode_spell:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = format(L["%s's spells"], classfmt(class, label))
 	end
 
 	function mode_spell:Update(win, set)
-		win.title = uformat(L["%s's spells"], win.actorname)
+		win.title = format(L["%s's spells"], classfmt(win.actorclass, win.actorname))
 		if not set or not win.actorname then return end
 
 		local actor = set:GetActor(win.actorname, win.actorid)
@@ -555,13 +555,13 @@ Skada:RegisterModule("Absorbs", function(L, P, G)
 		end
 	end
 
-	function mode_target:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = uformat(L["%s's targets"], label)
+	function mode_target:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = uformat(L["%s's targets"], classfmt(class, label))
 	end
 
 	function mode_target:Update(win, set)
-		win.title = uformat(L["%s's targets"], win.actorname)
+		win.title = uformat(L["%s's targets"], classfmt(win.actorclass, win.actorname))
 		if not set or not win.actorname then return end
 
 		local actor = set:GetActor(win.actorname, win.actorid)
@@ -726,15 +726,16 @@ Skada:RegisterModule("Absorbs", function(L, P, G)
 	end
 end)
 
--- ========================== --
--- Absorbs and healing module --
--- ========================== --
+---------------------------------------------------------------------------
+-- Absorbs and Healing Module
 
 Skada:RegisterModule("Absorbs and Healing", function(L, P)
 	local mode = Skada:NewModule("Absorbs and Healing")
 	local mode_spell = mode:NewModule("Spell List")
 	local mode_target = mode:NewModule("Target List")
 	local mode_target_spell = mode_target:NewModule("Spell List")
+	tooltip_school = tooltip_school or Skada.tooltip_school
+	local classfmt = Skada.classcolors.format
 	local mode_cols = nil
 
 	local function format_valuetext(d, columns, total, hps, metadata, subview)
@@ -761,7 +762,7 @@ Skada:RegisterModule("Absorbs and Healing", function(L, P)
 		local hps, amount = actor:GetAHPS(set)
 
 		local activepercent = activetime / totaltime * 100
-		tooltip:AddDoubleLine(format(L["%s's activity"], label), Skada:FormatPercent(activepercent), nil, nil, nil, PercentToRGB(activepercent))
+		tooltip:AddDoubleLine(format(L["%s's activity"], classfmt(actor.class, label)), Skada:FormatPercent(activepercent), nil, nil, nil, PercentToRGB(activepercent))
 		tooltip:AddDoubleLine(L["Segment Time"], Skada:FormatTime(set:GetTime()), 1, 1, 1)
 		tooltip:AddDoubleLine(L["Active Time"], Skada:FormatTime(activetime), 1, 1, 1)
 		tooltip:AddDoubleLine(L["Absorbs and Healing"], Skada:FormatNumber(amount), 1, 1, 1)
@@ -780,7 +781,7 @@ Skada:RegisterModule("Absorbs and Healing", function(L, P)
 		local spell = actor.healspells and actor.healspells[id] or actor.absorbspells and actor.absorbspells[id]
 		if not spell then return end
 
-		tooltip:AddLine(uformat("%s - %s", win.actorname, label))
+		tooltip:AddLine(uformat("%s - %s", classfmt(win.actorclass, win.actorname), label))
 		tooltip_school(tooltip, id)
 
 		local cast = actor.GetSpellCast and actor:GetSpellCast(id)
@@ -824,13 +825,13 @@ Skada:RegisterModule("Absorbs and Healing", function(L, P)
 		end
 	end
 
-	function mode_target_spell:Enter(win, id, label)
-		win.targetid, win.targetname = id, label
-		win.title = uformat(L["%s's spells on %s"], win.actorname, label)
+	function mode_target_spell:Enter(win, id, label, class)
+		win.targetid, win.targetname, win.targetclass = id, label, class
+		win.title = uformat(L["%s's spells on %s"], classfmt(win.actorclass, win.actorname), classfmt(class, label))
 	end
 
 	function mode_target_spell:Update(win, set)
-		win.title = uformat(L["%s's spells on %s"], win.actorname, win.targetname)
+		win.title = uformat(L["%s's spells on %s"], classfmt(win.actorclass, win.actorname), classfmt(win.targetclass, win.targetname))
 		if not set or not win.targetname then return end
 
 		local actor = set:GetActor(win.actorname, win.actorid)
@@ -875,13 +876,13 @@ Skada:RegisterModule("Absorbs and Healing", function(L, P)
 		end
 	end
 
-	function mode_spell:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = format(L["%s's spells"], label)
+	function mode_spell:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = format(L["%s's spells"], classfmt(class, label))
 	end
 
 	function mode_spell:Update(win, set)
-		win.title = uformat(L["%s's spells"], win.actorname)
+		win.title = format(L["%s's spells"], classfmt(win.actorclass, win.actorname))
 		if not win.actorname then return end
 
 		local actor = set and set:GetActor(win.actorname, win.actorid)
@@ -919,13 +920,13 @@ Skada:RegisterModule("Absorbs and Healing", function(L, P)
 		end
 	end
 
-	function mode_target:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = uformat(L["%s's targets"], label)
+	function mode_target:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = uformat(L["%s's targets"], classfmt(class, label))
 	end
 
 	function mode_target:Update(win, set)
-		win.title = uformat(L["%s's targets"], win.actorname)
+		win.title = uformat(L["%s's targets"], classfmt(win.actorclass, win.actorname))
 
 		local actor = set and set:GetActor(win.actorname, win.actorid)
 		local total = actor and actor:GetAbsorbHeal()
@@ -1049,12 +1050,12 @@ Skada:RegisterModule("Absorbs and Healing", function(L, P)
 	end
 end, "Absorbs", "Healing")
 
--- ============================== --
--- Healing done per second module --
--- ============================== --
+---------------------------------------------------------------------------
+-- HPS Module
 
 Skada:RegisterModule("HPS", function(L, P)
 	local mode = Skada:NewModule("HPS")
+	local classfmt = Skada.classcolors.format
 	local mode_cols = nil
 
 	local function format_valuetext(d, columns, total, metadata)
@@ -1079,7 +1080,7 @@ Skada:RegisterModule("HPS", function(L, P)
 		local activetime = actor:GetTime(set, true)
 		local hps, amount = actor:GetAHPS(set)
 
-		tooltip:AddLine(uformat("%s - %s", label, L["HPS"]))
+		tooltip:AddLine(uformat(L["%s's activity"], classfmt(actor.class, label), L["HPS"]))
 		tooltip:AddDoubleLine(L["Segment Time"], Skada:FormatTime(set:GetTime()), 1, 1, 1)
 		tooltip:AddDoubleLine(L["Active Time"], Skada:FormatTime(activetime), 1, 1, 1)
 		tooltip:AddDoubleLine(L["Absorbs and Healing"], Skada:FormatNumber(amount), 1, 1, 1)
@@ -1146,13 +1147,13 @@ Skada:RegisterModule("HPS", function(L, P)
 	end
 end, "Absorbs", "Healing", "Absorbs and Healing")
 
--- ===================== --
--- Healing done by spell --
--- ===================== --
+---------------------------------------------------------------------------
+-- Healing Done By Spell
 
 Skada:RegisterModule("Healing Done By Spell", function(L, _, _, C)
 	local mode = Skada:NewModule("Healing Done By Spell")
 	local mode_source = mode:NewModule("Source List")
+	local classfmt = Skada.classcolors.format
 	local clear = Private.clearTable
 	local get_absorb_heal_spells = nil
 	local mode_cols = nil
@@ -1178,7 +1179,7 @@ Skada:RegisterModule("Healing Done By Spell", function(L, _, _, C)
 		spell = spell or actor.absorbspells and actor.absorbspells[win.spellid]
 		if not spell then return end
 
-		tooltip:AddLine(uformat("%s - %s", label, win.spellname))
+		tooltip:AddLine(uformat("%s - %s", classfmt(actor.class, label), win.spellname))
 
 		local cast = actor.GetSpellCast and actor:GetSpellCast(win.spellid)
 		if cast then

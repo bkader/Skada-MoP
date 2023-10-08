@@ -17,14 +17,15 @@ local function format_valuetext(d, columns, total, metadata, subview)
 	end
 end
 
--- ======= --
--- CC Done --
--- ======= --
+---------------------------------------------------------------------------
+-- CC Done Module
+
 Skada:RegisterModule("CC Done", function(L, P, _, C)
 	local mode = Skada:NewModule("CC Done")
 	local mode_spell = mode:NewModule("Spell List")
 	local mode_target = mode:NewModule("Target List")
 	local mode_source = mode_spell:NewModule("Source List")
+	local classfmt = Skada.classcolors.format
 	local cc_spells = Skada.extra_cc_spells -- extended list
 	local get_actor_cc_targets = nil
 	local get_cc_done_sources = nil
@@ -72,13 +73,13 @@ Skada:RegisterModule("CC Done", function(L, P, _, C)
 		end
 	end
 
-	function mode_spell:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = uformat(L["%s's spells"], label)
+	function mode_spell:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = uformat(L["%s's spells"], classfmt(class, label))
 	end
 
 	function mode_spell:Update(win, set)
-		win.title = uformat(L["%s's spells"], win.actorname)
+		win.title = uformat(L["%s's spells"], classfmt(win.actorclass, win.actorname))
 
 		local actor = set and set:GetActor(win.actorname, win.actorid)
 		local total = actor and actor.ccdone
@@ -100,13 +101,13 @@ Skada:RegisterModule("CC Done", function(L, P, _, C)
 		end
 	end
 
-	function mode_target:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = uformat(L["%s's targets"], label)
+	function mode_target:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = uformat(L["%s's targets"], classfmt(class, label))
 	end
 
 	function mode_target:Update(win, set)
-		win.title = uformat(L["%s's targets"], win.actorname)
+		win.title = uformat(L["%s's targets"], classfmt(win.actorclass, win.actorname))
 
 		local targets, total, actor = get_actor_cc_targets(set, win.actorname, win.actorid)
 		if not targets or not actor or total == 0 then
@@ -268,14 +269,15 @@ Skada:RegisterModule("CC Done", function(L, P, _, C)
 	end
 end)
 
--- ======== --
--- CC Taken --
--- ======== --
+---------------------------------------------------------------------------
+-- CC Taken Module
+
 Skada:RegisterModule("CC Taken", function(L, P, _, C)
 	local mode = Skada:NewModule("CC Taken")
 	local mode_spell = mode:NewModule("Spell List")
 	local mode_source = mode:NewModule("Source List")
 	local mode_target = mode_spell:NewModule("Target List")
+	local classfmt = Skada.classcolors.format
 	local get_actor_cc_sources = nil
 	local get_cc_taken_targets = nil
 	local mode_cols = nil
@@ -331,13 +333,13 @@ Skada:RegisterModule("CC Taken", function(L, P, _, C)
 		end
 	end
 
-	function mode_spell:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = uformat(L["%s's spells"], label)
+	function mode_spell:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = uformat(L["%s's spells"], classfmt(class, label))
 	end
 
 	function mode_spell:Update(win, set)
-		win.title = uformat(L["%s's spells"], win.actorname)
+		win.title = uformat(L["%s's spells"], classfmt(win.actorclass, win.actorname))
 
 		local actor = set and set:GetActor(win.actorname, win.actorid)
 		local total = actor and actor.cctaken
@@ -359,13 +361,13 @@ Skada:RegisterModule("CC Taken", function(L, P, _, C)
 		end
 	end
 
-	function mode_source:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = uformat(L["%s's sources"], label)
+	function mode_source:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = uformat(L["%s's sources"], classfmt(class, label))
 	end
 
 	function mode_source:Update(win, set)
-		win.title = uformat(L["%s's sources"], win.actorname)
+		win.title = uformat(L["%s's sources"], classfmt(win.actorclass, win.actorname))
 
 		local sources, total, actor = get_actor_cc_sources(set, win.actorname, win.actorid)
 		if not sources or not actor or total == 0 then
@@ -527,13 +529,14 @@ Skada:RegisterModule("CC Taken", function(L, P, _, C)
 	end
 end)
 
--- ========= --
--- CC Breaks --
--- ========= --
+---------------------------------------------------------------------------
+-- CC Breaks Module
+
 Skada:RegisterModule("CC Breaks", function(L, P, _, C, M, O)
 	local mode = Skada:NewModule("CC Breaks")
 	local mode_spell = mode:NewModule("Spell List")
 	local mode_target = mode:NewModule("Target List")
+	local classfmt = Skada.classcolors.format
 	local cc_spells = Skada.cc_spells
 	local get_actor_cc_break_targets = nil
 	local mode_cols = nil
@@ -612,13 +615,13 @@ Skada:RegisterModule("CC Breaks", function(L, P, _, C, M, O)
 		end
 	end
 
-	function mode_spell:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = uformat(L["%s's spells"], label)
+	function mode_spell:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = uformat(L["%s's spells"], classfmt(class, label))
 	end
 
 	function mode_spell:Update(win, set)
-		win.title = uformat(L["%s's spells"], win.actorname)
+		win.title = uformat(L["%s's spells"], classfmt(win.actorclass, win.actorname))
 
 		local actor = set and set:GetActor(win.actorname, win.actorid)
 		local total = actor and actor.ccbreak
@@ -640,13 +643,13 @@ Skada:RegisterModule("CC Breaks", function(L, P, _, C, M, O)
 		end
 	end
 
-	function mode_target:Enter(win, id, label)
-		win.actorid, win.actorname = id, label
-		win.title = uformat(L["%s's targets"], label)
+	function mode_target:Enter(win, id, label, class)
+		win.actorid, win.actorname, win.actorclass = id, label, class
+		win.title = uformat(L["%s's targets"], classfmt(class, label))
 	end
 
 	function mode_target:Update(win, set)
-		win.title = uformat(L["%s's targets"], win.actorname)
+		win.title = uformat(L["%s's targets"], classfmt(win.actorclass, win.actorname))
 
 		local targets, total, actor = get_actor_cc_break_targets(set, win.actorname, win.actorid)
 		if not targets or not actor or total == 0 then
