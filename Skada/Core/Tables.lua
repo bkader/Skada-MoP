@@ -378,12 +378,11 @@ do
 	--
 
 	local custom_units = {
-		-- Example ICC - Lady Deathwhisper
+		-- Example ICC: Lady Deathwhisper
 		-- [36855] = {
-		-- 	text = L["%s - Phase 2"],
-		-- 	start = 0,
-		-- 	power = 0
-		-- },
+		-- 	{text = L["%s - Phase 1"], start = 1, power = 0},
+		-- 	{text = L["%s - Phase 2"], start = 0, power = 0}
+		-- }
 	}
 
 	------------------------------------------------------
