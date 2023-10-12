@@ -16986,7 +16986,7 @@ globals = {
 	"GetQuestWatchIndex",
 	"GetQuestWorldMapAreaID",
 	"GetQuestsCompleted",
-	"GetRaidDifficulty",
+	"GetRaidDifficultyID",
 	"GetRaidRosterInfo",
 	"GetRaidRosterSelection",
 	"GetRaidTargetIndex",

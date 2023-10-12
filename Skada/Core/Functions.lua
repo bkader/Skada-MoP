@@ -961,7 +961,7 @@ end
 -- instance difficulty
 
 do
-	local GetRaidDifficulty = GetRaidDifficulty
+	local GetRaidDifficultyID = GetRaidDifficultyID
 	local GetDungeonDifficulty = GetDungeonDifficulty
 
 	function Skada:GetInstanceDiff()
@@ -974,9 +974,9 @@ do
 			elseif diff == 2 or diff == 4 then
 				return (dynDiff == 0) and "25n" or (dynDiff == 1) and "25h" or "NaN"
 			end
-		elseif insType then
+		elseif insType == "raid" then
 			if diff == 1 then
-				local comp_diff = GetRaidDifficulty()
+				local comp_diff = GetRaidDifficultyID()
 				if diff ~= comp_diff and (comp_diff == 2 or comp_diff == 4) then
 					return "tw" -- timewalker
 				else
