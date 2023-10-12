@@ -294,8 +294,7 @@ do
 		__mode = "kv", -- make it weak
 		__index = function(self, guid)
 			if guid then
-				local _, _, _, _, _, id = strsplit("-", guid)
-				id = tonumber(id) or 0
+				local id = tonumber(guid:sub(7, 10), 16) or 0
 				rawset(self, guid, id) -- cache it
 				return id
 			end
