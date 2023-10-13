@@ -350,6 +350,7 @@ end
 -- Specs and Roles
 
 do
+	local rawget = rawget
 	local UnitExists, UnitGUID = UnitExists, UnitGUID
 	local LGT = LibStub("LibGroupInSpecT-1.0")
 
@@ -385,14 +386,14 @@ do
 
 	LGT:RegisterCallback("GroupInSpecT_Update", function(_, guid, _, info)
 		if not guid or not info then return end
-		GetUnitSpec[guid] = info.global_spec_id or GetUnitSpec[guid]
-		GetUnitRole[guid] = info.spec_role or GetUnitRole[guid]
+		rawset(GetUnitSpec, guid, info.global_spec_id or rawget(GetUnitSpec, guid))
+		rawset(GetUnitRole, guid, info.spec_role or rawget(GetUnitRole, guid))
 	end)
 
 	LGT:RegisterCallback("GroupInSpecT_Remove", function(_, guid)
 		if not guid then return end
-		GetUnitSpec[guid] = nil
-		GetUnitRole[guid] = nil
+		rawset(GetUnitSpec, guid, nil)
+		rawset(GetUnitRole, guid, nil)
 	end)
 
 	lib.GetUnitSpec = GetUnitSpec
