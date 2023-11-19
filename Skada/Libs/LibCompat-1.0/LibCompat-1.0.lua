@@ -356,12 +356,18 @@ do
 	local rawget = rawget
 	local UnitExists, UnitGUID = UnitExists, UnitGUID
 	local LGT = LibStub("LibGroupInSpecT-1.0")
+	local GetUnitSpec, GetUnitRole = {}, {}
 
-	local GetUnitSpec = setmetatable({}, {
+	GetUnitSpec = setmetatable(GetUnitSpec, {
 		__index = function(self, guid)
 			local info = LGT:GetCachedInfo(guid)
 			local spec = info and info.global_spec_id or nil
-			rawset(self, guid, spec)
+			if spec then
+				rawset(self, guid, spec)
+				if info.spec_role and not rawget(GetUnitRole, guid) then
+					rawset(GetUnitRole, guid, info.spec_role)
+				end
+			end
 			return spec
 		end,
 		__newindex = function(self, guid, spec)
@@ -372,11 +378,16 @@ do
 		end
 	})
 
-	local GetUnitRole = setmetatable({}, {
+	GetUnitRole = setmetatable(GetUnitRole, {
 		__index = function(self, guid)
 			local info = LGT:GetCachedInfo(guid)
 			local role = info and info.spec_role or nil
-			rawset(self, guid, role)
+			if role then
+				rawset(self, guid, role)
+				if info.global_spec_id and not rawget(GetUnitSpec, guid) then
+					rawset(GetUnitSpec, guid, info.global_spec_id)
+				end
+			end
 			return role
 		end,
 		__newindex = function(self, guid, role)
