@@ -4,7 +4,7 @@
 -- in the unlikely event they end up being usable outside of Skada.
 -- Renaming the library (MAJOR) might break few things.
 
-local MAJOR, MINOR = "SpecializedLibBars-1.0", 90026
+local MAJOR, MINOR = "SpecializedLibBars-1.0", 90027
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end -- No Upgrade needed.
 local folder = ...
@@ -66,6 +66,13 @@ elseif LOCALE_frFR then
 	L_RESIZE_ALT_CLICK = "\124cff00ff00Alt clic\124r pour changer la hauteur."
 	L_LOCK_WINDOW = "Verrouiller la fen\195\170tre"
 	L_UNLOCK_WINDOW = "D\195\169verrouiller la fen\195\170tre"
+elseif LOCALE_itIT then
+	L_RESIZE_HEADER = "Ridimensionare"
+	L_RESIZE_CLICK = "\124cff00ff00Clic\124r per ridimensionare la finestra."
+	L_RESIZE_SHIFT_CLICK = "\124cff00ff00Shift-Clic\124r per modificare la larghezza."
+	L_RESIZE_ALT_CLICK = "\124cff00ff00Alt-Click\124r per modificare l'altezza."
+	L_LOCK_WINDOW = "Blocca la finestra"
+	L_UNLOCK_WINDOW = "Sblocca la finestra"
 elseif LOCALE_koKR then
 	L_RESIZE_HEADER = "크기 조정"
 	L_RESIZE_CLICK = "\124cff00ff00클릭\124r하여 창 크기를 자유롭게 조정합니다."
@@ -73,6 +80,13 @@ elseif LOCALE_koKR then
 	L_RESIZE_ALT_CLICK = "높이를 변경하려면 \124cff00ff00Alt-클릭\124r하십시오"
 	L_LOCK_WINDOW = "잠금 창"
 	L_UNLOCK_WINDOW = "잠금 해제 창"
+elseif LOCALE_ptBR or LOCALE_ptPT then
+	L_RESIZE_HEADER = "Redimensionar"
+	L_RESIZE_CLICK = "\124cff00ff00Clique\124r para redimensionar a janela."
+	L_RESIZE_SHIFT_CLICK = "\124cff00ff00Shift-Clique\124r para alterar a largura."
+	L_RESIZE_ALT_CLICK = "\124cff00ff00Alt-Clique\124r para alterar a altura."
+	L_LOCK_WINDOW = "Bloquear janela"
+	L_UNLOCK_WINDOW = "Desbloquear janela"
 elseif LOCALE_ruRU then
 	L_RESIZE_HEADER = "Изменение размера"
 	L_RESIZE_CLICK = "\124cff00ff00Щелкните\124r, чтобы изменить размер окна."
@@ -284,6 +298,7 @@ do
 		local maxbars = self:GetMaxBars()
 		local numbars = self:GetNumBars()
 		local offset = self:GetBarOffset()
+		direction = self.growup and (0 - direction) or direction
 
 		if direction == 1 and offset > 0 then
 			self:SetBarOffset(IsShiftKeyDown() and 0 or max(0, offset - (IsControlKeyDown() and maxbars or scrollspeed)))
@@ -1611,25 +1626,20 @@ do
 		local spacing = self.spacing
 		local startpoint = self.button:IsVisible() and (self.button:GetHeight() + self.startpoint) or 0
 
-		local from, to
 		local offset = self.offset
 		local y1, y2 = startpoint, startpoint
 		local maxbars = min(#values, self.maxBars)
+		local start = min(1 + offset, #values)
+		local stop = min(maxbars + offset, #values)
 
-		local start, stop, step, fixnum
+		local from, to, fixnum
 		if growup then
 			from = "BOTTOM"
 			to = "TOP"
-			start = min(#values, maxbars + offset)
-			stop = min(#values, 1 + offset)
-			step = -1
 			fixnum = start
 		else
 			from = "TOP"
 			to = "BOTTOM"
-			start = min(1 + offset, #values)
-			stop = min(maxbars + offset, #values)
-			step = 1
 			fixnum = stop
 		end
 
@@ -1647,7 +1657,7 @@ do
 		local thickness = self.thickness
 		local shown = 0
 
-		for i = start, stop, step do
+		for i = start, stop, 1 do
 			local origTo = to
 			local v = values[i]
 			if lastBar == self then
