@@ -1,4 +1,4 @@
-# Skada for Mists of Pandaria (_Revisited - v1.8.85_)
+# Skada for Mists of Pandaria `5.4.8` (_Revisited - v1.8.86_)
 
 ![Discord](https://img.shields.io/discord/795698054371868743?label=discord)
 ![GitHub last commit](https://img.shields.io/github/last-commit/bkader/Skada-MoP)
@@ -11,6 +11,7 @@ Skada is a modular damage meter with various viewing modes, segmented fights and
 _**FOR PRIVATE SERVERS**_:
 * _[Wrath of the Lich King](https://github.com/bkader/Skada-WoTLK)_
 * _[Cataclysm](https://github.com/bkader/Skada-Cata)_
+* _[Warlords of Draenor](https://github.com/bkader/Skada-WoD)_
 * _[Legion](https://github.com/bkader/Skada-Legion)_
 
 _**FOR OFFICIAL SERVERS**_:
