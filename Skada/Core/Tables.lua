@@ -114,10 +114,11 @@ ns.cc_spells = {
 	[28271] = 0x40, -- Polymorph: Turtle
 	[28272] = 0x40, -- Polymorph: Pig
 	[33786] = 0x08, -- Cyclone
-	[96294] = 0x10, -- Chains of Ice
+	[45524] = 0x10, -- Chains of Ice
 	[51514] = 0x08, -- Hex
 	[51722] = 0x01, -- Dismantle
 	[52719] = 0x01, -- Concussion Blow
+	[96294] = 0x10 -- Chains of Ice
 }
 
 -- extended list of crowd control spells
@@ -130,19 +131,29 @@ ns.extra_cc_spells = setmetatable({
 	[46968] = 0x01, -- Shockwave
 	[58357] = 0x01, -- Heroic Throw silence
 	[107566] = 0x01, -- Staggering Shout
+	[132168] = 0x01, -- Shockwave
+	[132169] = 0x01, -- Storm Bolt
 	-- Death Knight
 	[47476] = 0x20, -- Strangulate
 	[47481] = 0x01, -- Gnaw
+	[47528] = 0x10, -- Mind Freeze
 	[49560] = 0x01, -- Death Grip
 	[79092] = 0x10, -- Hungering Cold
+	[91807] = 0x01, -- Shambling Rush
+	[108194] = 0x01, -- Asphyxiate
 	-- Paladin
 	[853] = 0x02, -- Hammer of Justice
 	[2812] = 0x02, -- Holy Wrath
 	[10326] = 0x02, -- Turn Evil
 	[31935] = 0x02, -- Avengers Shield
+	[96231] = 0x01, -- Rebuke
 	[105421] = 0x02, -- Blinding Light
 	-- Monk
+	[107079] = 0x01, -- Quaking Palm
+	[115078] = 0x01, -- Paralysis
+	[116705] = 0x01, -- Spear Hand Strike
 	[116706] = 0x01, -- Disable
+	[119381] = 0x01, -- Leg Sweep
 	-- Priest
 	[605] = 0x20, -- Dominate Mind (Mind Control)
 	[8122] = 0x20, -- Psychic Scream
@@ -152,17 +163,26 @@ ns.extra_cc_spells = setmetatable({
 	[3600] = 0x08, -- Earthbind (Earthbind Totem)
 	[8034] = 0x10, -- Frostbrand Weapon
 	[8056] = 0x10, -- Frost Shock
+	[57994] = 0x08,  -- Wind Shear
 	[64695] = 0x08, -- Earthgrab
+	[118905] = 0x08, -- Static Charge
 	-- Druid
-	[339] = 0x08, -- Entangling Roots
+	[99] = 0x01, -- Incapacitating Roar
+	[5211] = 0x01, -- Mighty Bash
 	[16979] = 0x01, -- Feral Charge - Bear
 	[19975] = 0x08, -- Entangling Roots (Nature's Grasp)
 	[22570] = 0x01, -- Maim
 	[45334] = 0x01, -- Feral Charge Effect
+	[50259] = 0x01, -- Dazed
+	[61391] = 0x08, -- Typhoon
 	[66070] = 0x08, -- Entangling Roots (Force of Nature)
+	[93985] = 0x01, -- Skull Bash
+	[102359] = 0x08, -- Mass Entanglement
+	[127797] = 0x08, -- Ursol's Vortex
 	-- Rogue
 	[408] = 0x01, -- Kidney Shot
 	[1330] = 0x01, -- Garrote - Silence
+	[1766] = 0x01, -- Kick
 	[1776] = 0x01, -- Gouge
 	[1833] = 0x01, -- Cheap Shot
 	[2094] = 0x01, -- Blind
@@ -176,10 +196,12 @@ ns.extra_cc_spells = setmetatable({
 	[61721] = 0x40, -- Polymorph Rabbit
 	[61780] = 0x40, -- Polymorph Turkey
 	[82691] = 0x10, -- Ring of Frost
+	[82691] = 0x10, -- Ring of Frost
 	[111340] = 0x10, -- Ice Ward
 	-- Warlock
 	[5484] = 0x20, -- Howl of Terror
 	[6789] = 0x20, -- Death Coil
+	[19647] = 0x20, -- Spell Lock
 	[22703] = 0x04, -- Infernal Awakening
 	[24259] = 0x20, -- Spell Lock
 	[30283] = 0x20, -- Shadowfury
@@ -196,7 +218,10 @@ ns.extra_cc_spells = setmetatable({
 	[26090] = 0x08, -- Pummel (Gorilla)
 	[50541] = 0x01, -- Clench (Scorpid)
 	[64803] = 0x01, -- Entrapment
+	[117405] = 0x01, -- Binding Shot
+	[117526] = 0x40, -- Binding Shot
 	[136634] = 0x08, -- Narrow Escape
+	[147362] = 0x01, -- Counter Shot
 	-- Racials
 	[20549] = 0x01, -- War Stomp (Tauren)
 	[28730] = 0x40, -- Arcane Torrent (Bloodelf)
